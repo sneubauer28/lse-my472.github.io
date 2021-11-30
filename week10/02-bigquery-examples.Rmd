@@ -25,7 +25,7 @@ This dataset contains the number of crimes at two different geographic levels of
 project_name <- "bigquery-public-data"
 
 # Billing (main project ID)
-billing_info <- "my472-333417"
+billing_info <- "my472-week10"
 
 # Dataset name (London crime database within the public databases)
 dataset_name <- "london_crime"
@@ -98,7 +98,7 @@ crime_per_lsoa_code
 ```{r}
 
 # Download the shape file from https://data.london.gov.uk/dataset/statistical-gis-boundary-files-london and unzip
-shp <- readOGR(dsn = "~/Downloads/statistical-gis-boundaries-london/ESRI/LSOA_2011_London_gen_MHW.shp",
+shp <- readOGR(dsn = "statistical-gis-boundaries-london/ESRI/LSOA_2011_London_gen_MHW.shp",
                stringsAsFactors = FALSE)
 
 # Obtaining longitude and latitude (contains an ID column, but starting at zero!)

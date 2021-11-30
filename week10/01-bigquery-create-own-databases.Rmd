@@ -11,6 +11,7 @@ Loading packages:
 
 ```{r}
 library("DBI")
+#install.packages("bigrquery")
 library("bigrquery")
 ```
 
@@ -18,18 +19,20 @@ First, we need to create a project with the BigQuery sandbox as described [here]
 
 ```{r}
 # Project name (project ID)
-project_name <- "tba"
+project_name <- "my472-week10"
 
 # Billing (project ID)
-billing_id <- "tba"
+billing_id <- "my472-week10"
 
 # Dataset name (created on website)
-dataset_name <- "tba"
+dataset_name <- "ds_sn_472"
 ```
 
 We can now use the `DBI` package and syntax that we have used before to access our online database, add and delete tables, and run queries.
 
 ```{r}
+#:: meaning- from the package, use this function
+
 db <- dbConnect(
   bigrquery::bigquery(), # replaces the previous SQLite line 
   project = project_name,
@@ -43,8 +46,9 @@ As an example, let us add the congress table to the database. First read in the 
 
 ```{r}
 # Reading the first file into R
-congress <- read.csv("data/congress-facebook-2017.csv",
+congress <- read.csv("congress-facebook-2017.csv",
 	stringsAsFactors = FALSE)
+
 ```
 
 Now we can write this table into our online database. When you run the following code, a browser window should open where you authenticate the package to use your Google account. If you receive a "Can't get Google credentials" error when running this code chunk, just copy and paste the code into the R console directly which should then open the browser window.

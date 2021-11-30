@@ -62,7 +62,7 @@ First, read in the congress table:
 
 ```{r, eval = FALSE}
 # read the congress data first
-congress <- read.csv("data/congress-facebook-2017.csv", stringsAsFactors = FALSE)
+congress <- read.csv("congress-facebook-2017.csv", stringsAsFactors = FALSE)
 congress <- congress %>% rename(role = type)
 ```
 
@@ -70,7 +70,7 @@ Now loop over all the posts tables and merge each with the relevant information 
 
 ```{r, eval=FALSE}
 
-fls <- list.files("data/posts", full.names=TRUE)
+fls <- list.files("posts", full.names=TRUE)
 
 for (f in fls){
   
@@ -101,7 +101,7 @@ Testing that it worked and closing the connection:
 # Return the number of documents
 collection$count()
 
-# dbGetQuery(dbsql, 'SELECT * FROM posts LIMIT 5')
+dbGetQuery(dbsql, 'SELECT * FROM posts LIMIT 5')
 collection$find('{}', limit=5)  # '{}' indicates everything
 
 # Note: You can remove (all) documents with
@@ -116,7 +116,7 @@ Now that we have our documents in the database, let's see how we can query them.
 
 ```{r}
 # Change path to where you stored the SQLite database after you created it
-dbsql <- dbConnect(RSQLite::SQLite(), "data/facebook-db.sqlite")
+dbsql <- dbConnect(RSQLite::SQLite(), "facebook-db.sqlite")
 ```
 
 First, we connect to the database and collection using the function `mongo` and then query either using `*$find()` (for simple queries) or `*$aggregate()` (for more complex queries).
@@ -263,7 +263,6 @@ dbGetQuery(dbsql,
   FROM posts
   GROUP BY type
   ORDER BY type_count")
-
 
 # And in descending orders
 collection$aggregate('[{"$group": {"_id": "$type", "type_count": {"$sum": 1}}},
